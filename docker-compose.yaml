@@ -1,0 +1,50 @@
+services:
+  mysql:
+    env_file:
+      - .env
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+
+  rabbitmq:
+    env_file:
+      - .env
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+
+  app:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    container_name: app
+    restart: always
+    depends_on:
+      - mysql
+      - rabbitmq
+    ports:
+      - 8000:8000
+      - 50051:50051
+      - 8080:8080
+
+volumes:
+  mysql:
+  rabbitmq:
