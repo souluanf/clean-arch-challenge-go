@@ -3,71 +3,33 @@
 Este desafio consiste na criação do use case de listagem de pedidos (orders), implementando diferentes interfaces de
 comunicação: REST, gRPC e GraphQL.
 
-## Pré-requisitos
-
-### Clonar o Repositório
-
-Baixe o repositório e acesse a pasta do desafio:
-
-```bash
-git clone https://github.com/souluanf/clean-arch-challenge-go.git
-cd clean-arch-challenge-go
-```
 
 ## Execução
 
-### Somente Docker
-
-- Copiar Variáveis de Ambiente
+1. **Baixe o repositório e acesse a pasta do desafio:**
 
     ```bash
-    cp .env.docker .env
+    git clone https://github.com/souluanf/clean-arch-challenge-go.git
+    cd clean-arch-challenge-go
     ```
 
-- Execute a subida dos containers:
+2. **Copiar Variáveis de Ambiente**
+
+    ```bash
+    cp .env.sample .env
+    ```
+
+3. **Execute a subida dos containers:**
 
    ```bash
    docker-compose up -d
    ```
-- Verificar os logs do container:
+4. **Verificar os logs do container:**
 
    ```bash
     docker logs -f app
    ```
 
-### Docker e Local
-
-- Copiar Variáveis de Ambiente
-
-    ```bash
-    cp .env.local .env
-    ```
-
-1. Instale as dependências:
-
-   ```bash
-   go install github.com/ktr0731/evans@latest
-   go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-   go mod tidy
-   ```
-
-2. Execute o MySQL e RabbitMQ:
-
-   ```bash
-   docker-compose up -d mysql rabbitmq
-   ```
-
-3. Execute as migrações:
-
-   ```bash
-   migrate -path=internal/infra/database/migrations -database "mysql://root:root@tcp(localhost:3306)/orders" -verbose up
-   ```
-
-4. Execute os servidores:
-
-   ```bash
-   go run cmd/ordersystem/wire_gen.go cmd/ordersystem/main.go
-   ```
 
 ## Testando Endpoints
 
