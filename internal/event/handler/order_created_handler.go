@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"clean-arch-challenge-go/pkg/events"
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 type OrderCreatedHandler struct {

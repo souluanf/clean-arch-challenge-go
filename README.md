@@ -29,6 +29,11 @@ cd clean-arch-challenge-go
    ```bash
    docker-compose up -d
    ```
+- Verificar os logs do container:
+
+   ```bash
+    docker logs -f app
+   ```
 
 ### Docker e Local
 
