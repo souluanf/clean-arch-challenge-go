@@ -11,7 +11,7 @@ require (
 	github.com/rabbitmq/amqp091-go v1.10.0
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.9.0
-	github.com/vektah/gqlparser/v2 v2.5.12
+	github.com/vektah/gqlparser/v2 v2.5.14
 	google.golang.org/grpc v1.64.0
 	google.golang.org/protobuf v1.34.1
 )
